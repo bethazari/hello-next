@@ -3,21 +3,17 @@ import Link from 'next/link';
 
 import Layout from '../components/layout';
 
-const PostLink = (props) => (
-  <li key={props.id}>
-    <Link as={`/p/${props.id}`} href={`/post?title=${props.title}`}>
-      <a>{props.title}</a>
-    </Link>
-  </li>
-);
-
 const Index = (props) => (
   <div>
     <Layout>
       <h1>My Blog</h1>
       <ul>
         {props.shows.map((show) => (
-          <PostLink key={show.id} id={show.id} title={show.name}/>
+          <li key={show.id}>
+            <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
+              <a>{show.name}</a>
+            </Link>
+          </li>
         ))}        
       </ul>
     </Layout>
@@ -30,7 +26,7 @@ Index.getInitialProps = async function() {
 
   console.log(`Shows data fetched! Count: ${data.length}`);
 
-  return { shows: data };
+  return { shows: data.map(show => show.show) };
 };
 
 export default Index;
