@@ -7,7 +7,7 @@ const linkStyle = { marginRight: 25 };
 const styles = {};
 
 const Header = () => (
-  <div className="root">
+  <div>
     <AppBar position="static">
       <Toolbar>
         <Link href="/">
@@ -21,14 +21,4 @@ const Header = () => (
   </div>
 )
 
-const x = withStyles(styles)(Header)
-
-x.componentDidMount = () => {
-  // Remove the server-side injected CSS.
-  const jssStyles = document.querySelector('#jss-server-side');
-  if (jssStyles && jssStyles.parentNode) {
-    jssStyles.parentNode.removeChild(jssStyles);
-  }
-}
-
-export default x;
+export default Header;
