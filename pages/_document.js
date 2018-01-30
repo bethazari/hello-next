@@ -19,9 +19,7 @@ class MyDocument extends Document {
               'user-scalable=0, initial-scale=1, ' +
               'minimum-scale=1, width=device-width, height=device-height'
             }
-          />
-          {/* PWA primary color */}
-          <meta name="theme-color" content={pageContext.theme.palette.primary[500]} />
+          />          
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"

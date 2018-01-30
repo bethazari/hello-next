@@ -4,11 +4,18 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 
 const linkStyle = { marginRight: 25 };
-const styles = {};
+const styles = {
+  appbar: {
+    position: 'absolute',
+    width: `calc(100% - 240px)`,
+    marginLeft: 240,
+  }
+};
 
-const Header = () => (
-  <div>
-    <AppBar position="static">
+const Header = (props) => {
+  const { classes } = props;
+  return <div>
+    <AppBar position="static" className={classes.appbar}>
       <Toolbar>
         <Link href="/">
           <a style={linkStyle}>Home</a>
@@ -19,6 +26,6 @@ const Header = () => (
       </Toolbar>
     </AppBar>
   </div>
-)
+}
 
-export default Header;
+export default withStyles(styles)(Header);
