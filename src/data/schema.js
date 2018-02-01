@@ -6,6 +6,7 @@ type Query {
   testString: String
   author(firstName: String, lastName: String): Author
   allAuthors: [Author]
+  allChannels: [Channel]
 }
 
 type Author {
@@ -21,6 +22,11 @@ type Post {
   text: String
   views: Int
   author: Author
+}
+
+type Channel {
+  id: Int
+  name: String
 }
 `;
 

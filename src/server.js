@@ -10,8 +10,9 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const getUserData = async () => {
-  const j = rp.jar();
+const j = rp.jar();
+
+const getUserData = async () => {  
   const loginData = await rp({
     method: "POST",
     uri: "http://default.coin32-cab.demo.al.re/api/2/common/login", 
@@ -47,7 +48,7 @@ getUserData().then((userData) => {
       server.use(
         '/graphql', 
         bodyParser.json(), 
-        apollo.graphqlExpress(req => ({schema})),
+        apollo.graphqlExpress(req => ({schema, context: { j }})),
       );
       server.use(
         '/graphiql', 
