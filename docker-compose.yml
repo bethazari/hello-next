@@ -4,7 +4,7 @@ services:
   hello:
     build: .
     ports:
-      - "3000:3000"
+      - "3000:80"
     volumes:
       - ./src:/app/src
       - ./pages:/app/pages

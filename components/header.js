@@ -18,7 +18,7 @@ const Header = (props) => {
     <AppBar position="static" className={classes.appbar}>
       <Toolbar>
         <Link href="/">
-          <a style={linkStyle}>Home</a>
+          <a style={linkStyle}>Home222</a>
         </Link>
         <Link href="/about">
           <a style={linkStyle}>About</a>
