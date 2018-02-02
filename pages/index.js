@@ -1,3 +1,8 @@
+import { ApolloProvider, graphql } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import gql from 'graphql-tag';
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 import Button from 'material-ui/Button';
@@ -6,35 +11,18 @@ import { withStyles } from 'material-ui';
 
 import Layout from '../components/layout';
 
-const styles = theme => ({
-  container: {
-  },
-  textField: {
-  },
+const apolloClient = new ApolloClient({
+  link: new HttpLink(),
+  cache: new InMemoryCache(),
 });
+const query = gql`{ allChannels { id } }`;
+
+const Mydiv = graphql(query)(({data: { channels }}) => <div><ul>{channels.map(channel => <li></li>)}</ul></div>);
 
 const Index = (props) => {
-  const { classes } = props;
-  return <Layout>
-    <h1>Login Form</h1>
-    <form noValidate autoComplete="off">      
-      <div><TextField
-        className={classes.textField}
-        label="Введите email..."
-        autoFocus={true}
-        margin="normal"
-      /></div>
-      <div><TextField
-        className={classes.textField}
-        label="Введите пароль..."
-        type="password"
-        margin="normal"
-      /></div>
-    </form>
-    <Button
-      raised            
-    >LogIn</Button>
-    <h1>My Blog</h1>
+  return <ApolloProvider client={apolloClient}><Layout>
+    <h1>My Blog123</h1>
+    <Mydiv/>
     <ul>
       {props.shows.map((show) => (
         <li key={show.id}>
@@ -44,7 +32,7 @@ const Index = (props) => {
         </li>
       ))}        
     </ul>
-  </Layout>
+  </Layout></ApolloProvider>
 };
 
 Index.getInitialProps = async function() {
@@ -56,4 +44,4 @@ Index.getInitialProps = async function() {
   return { shows: data.map(show => show.show) };
 };
 
-export default withStyles(styles)(Index);
+export default Index;
